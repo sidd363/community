@@ -1,0 +1,136 @@
+{
+  "name": "member",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "community": {
+      "type": "belongsTo",
+      "model": "community",
+      "foreignKey": "communityId",
+      "required": true
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
+      "required": true
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "approve"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "removeUser"
+    }
+  ],
+  "methods": {
+    "approve": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "communityId",
+          "type": "string",
+          "description": "communityId",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "userid",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Returns the personality chart of a user",
+      "http": {
+        "path": "/:communityId/approve/:id",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "removeUser": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "communityId",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "memberId",
+          "type": "string",
+          "description": "userid",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Returns the personality chart of a user",
+      "http": {
+        "path": "/:id/remove/:memberId",
+        "verb": "post",
+        "status": 200
+      }
+    }
+  }
+}

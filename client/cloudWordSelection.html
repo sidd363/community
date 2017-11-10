@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Shrofile - Word Cloud</title>
+<link rel="stylesheet" href="css/shrofile.css">
+
+<!--[if lt IE 9]>
+			<script src="js/html5shiv.js"></script>
+			<script src="js/respond.min.js"></script>
+<![endif]-->
+
+<script src="js/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <section>
+
+          <div class="custom-container">
+
+              	<div class="red-bg">
+
+                  	<div class="color-overlay-wc" style="background: rgba(243, 33, 44, 0.6);border-radius: 3px 3px 0px 0px;">
+
+                         <div style="width: 100%; height:300px; overflow: hidden">
+
+                              <canvas height="800" width="800" id="tagcanvas" style="width: 100%;">
+
+                              <p>Anything in here will be replaced on browsers that support the canvas element</p>
+
+                              </canvas>
+
+                         </div>
+
+                         <div id="taglist">
+                              <ul id="cmsg">
+                                   <li><a href="javascript:void(0);">abstract</a></li>
+                                   <li><a href="javascript:void(0);">accomodating</a></li>
+                                   <li><a href="javascript:void(0);">active</a></li>
+                                   <li><a href="javascript:void(0);">adventurous</a></li>
+                                   <li><a href="javascript:void(0);">aggressive</a></li>
+                                   <li><a href="javascript:void(0);">alligned</a></li>
+                                   <li><a href="javascript:void(0);">aloof</a></li>
+                                   <li><a href="javascript:void(0);">analytical</a></li>
+                                   <li><a href="javascript:void(0);">angry</a></li>
+                                   <li><a href="javascript:void(0);">arrogant</a></li>
+                                   <li><a href="javascript:void(0);">articulate</a></li>
+                                   <li><a href="javascript:void(0);">attractive</a></li>
+                                   <li><a href="javascript:void(0);">authentic</a></li>
+                                   <li><a href="javascript:void(0);">balanced</a></li>
+                                   <li><a href="javascript:void(0);">beautiful</a></li>
+                                   <li><a href="javascript:void(0);">big picture</a></li>
+                                   <li><a href="javascript:void(0);">blunt</a></li>
+                                   <li><a href="javascript:void(0);">calm</a></li>
+                                   <li><a href="javascript:void(0);">care free</a></li>
+                                   <li><a href="javascript:void(0);">cautious</a></li>
+                                   <li><a href="javascript:void(0);">cheerful</a></li>
+                                   <li><a href="javascript:void(0);">clear</a></li>
+                                   <li><a href="javascript:void(0);">collaborator</a></li>
+                                   <li><a href="javascript:void(0);">committed</a></li>
+                                   <li><a href="javascript:void(0);">communicator</a></li>
+                                   <li><a href="javascript:void(0);">complacent</a></li>
+                                   <li><a href="javascript:void(0);">compliant</a></li>
+                                   <li><a href="javascript:void(0);">confident</a></li>
+                                   <li><a href="javascript:void(0);">confused</a></li>
+                                   <li><a href="javascript:void(0);">considerate</a></li>
+                                   <li><a href="javascript:void(0);">consistent</a></li>
+                                   <li><a href="javascript:void(0);">contributor</a></li>
+                                   <li><a href="javascript:void(0);">controlling</a></li>
+                                   <li><a href="javascript:void(0);">cooperative</a></li>
+                                   <li><a href="javascript:void(0);">creative</a></li>
+                                   <li><a href="javascript:void(0);">critical</a></li>
+                                   <li><a href="javascript:void(0);">cynic</a></li>
+                                   <li><a href="javascript:void(0);">daring</a></li>
+                                   <li><a href="javascript:void(0);">decisive</a></li>
+                                   <li><a href="javascript:void(0);">dedicated</a></li>
+                                   <li><a href="javascript:void(0);">dependable</a></li>
+                                   <li><a href="javascript:void(0);">detail oriented</a></li>
+                                   <li><a href="javascript:void(0);">determined</a></li>
+                                   <li><a href="javascript:void(0);">diplomatic</a></li>
+                                   <li><a href="javascript:void(0);">direct</a></li>
+                                   <li><a href="javascript:void(0);">disciplined</a></li>
+                                   <li><a href="javascript:void(0);">disillusioned</a></li>
+                                   <li><a href="javascript:void(0);">disruptive</a></li>
+                                   <li><a href="javascript:void(0);">doer</a></li>
+                                   <li><a href="javascript:void(0);">dreamer</a></li>
+                                   <li><a href="javascript:void(0);">driven</a></li>
+                                   <li><a href="javascript:void(0);">dull</a></li>
+                                   <li><a href="javascript:void(0);">eager</a></li>
+                                   <li><a href="javascript:void(0);">easy going</a></li>
+                                   <li><a href="javascript:void(0);">efficient</a></li>
+                                   <li><a href="javascript:void(0);">elegant</a></li>
+                                   <li><a href="javascript:void(0);">Empathetic</a></li>
+                                   <li><a href="javascript:void(0);">energetic</a></li>
+                                   <li><a href="javascript:void(0);">engaging</a></li>
+                                   <li><a href="javascript:void(0);">enthusiastic</a></li>
+                                   <li><a href="javascript:void(0);">executioner</a></li>
+                                   <li><a href="javascript:void(0);">experimental</a></li>
+                                   <li><a href="javascript:void(0);">extravagant</a></li>
+                                   <li><a href="javascript:void(0);">fearful</a></li>
+                                   <li><a href="javascript:void(0);">fearless</a></li>
+                                   <li><a href="javascript:void(0);">flamboyant</a></li>
+                                   <li><a href="javascript:void(0);">flexible</a></li>
+                                   <li><a href="javascript:void(0);">focused</a></li>
+                                   <li><a href="javascript:void(0);">follower</a></li>
+                                   <li><a href="javascript:void(0);">forgetful</a></li>
+                                   <li><a href="javascript:void(0);">forgiving</a></li>
+                                   <li><a href="javascript:void(0);">generous</a></li>
+                                   <li><a href="javascript:void(0);">glamorous</a></li>
+                                   <li><a href="javascript:void(0);">grounded</a></li>
+                                   <li><a href="javascript:void(0);">gullible</a></li>
+                                   <li><a href="javascript:void(0);">helpful</a></li>
+                                   <li><a href="javascript:void(0);">honest</a></li>
+                                   <li><a href="javascript:void(0);">humble</a></li>
+                                   <li><a href="javascript:void(0);">humourous</a></li>
+                                   <li><a href="javascript:void(0);">hyper</a></li>
+                                   <li><a href="javascript:void(0);">ignorant</a></li>
+                                   <li><a href="javascript:void(0);">imaginative</a></li>
+                                   <li><a href="javascript:void(0);">immature</a></li>
+                                   <li><a href="javascript:void(0);">impressive</a></li>
+                                   <li><a href="javascript:void(0);">impulsive</a></li>
+                                   <li><a href="javascript:void(0);">inclusive</a></li>
+                                   <li><a href="javascript:void(0);">independent</a></li>
+                                   <li><a href="javascript:void(0);">individual</a></li>
+                                   <li><a href="javascript:void(0);">innovator</a></li>
+                                   <li><a href="javascript:void(0);">inquisitive</a></li>
+                                   <li><a href="javascript:void(0);">insecure</a></li>
+                                   <li><a href="javascript:void(0);">insensitive</a></li>
+                                   <li><a href="javascript:void(0);">insightful</a></li>
+                                   <li><a href="javascript:void(0);">integral</a></li>
+                                   <li><a href="javascript:void(0);">introspective</a></li>
+                                   <li><a href="javascript:void(0);">intuitive</a></li>
+                                   <li><a href="javascript:void(0);">judgemental</a></li>
+                                   <li><a href="javascript:void(0);">keen listener</a></li>
+                                   <li><a href="javascript:void(0);">learner</a></li>
+                                   <li><a href="javascript:void(0);">level headed</a></li>
+                                   <li><a href="javascript:void(0);">logical</a></li>
+                                   <li><a href="javascript:void(0);">loner</a></li>
+                                   <li><a href="javascript:void(0);">manipulative</a></li>
+                                   <li><a href="javascript:void(0);">mentor</a></li>
+                                   <li><a href="javascript:void(0);">modest</a></li>
+                                   <li><a href="javascript:void(0);">obedient</a></li>
+                                   <li><a href="javascript:void(0);">observant</a></li>
+                                   <li><a href="javascript:void(0);">optimistic</a></li>
+                                   <li><a href="javascript:void(0);">organized</a></li>
+                                   <li><a href="javascript:void(0);">paranoid</a></li>
+                                   <li><a href="javascript:void(0);">patience</a></li>
+                                   <li><a href="javascript:void(0);">perfectionist</a></li>
+                                   <li><a href="javascript:void(0);">performer</a></li>
+                                   <li><a href="javascript:void(0);">pessimistic</a></li>
+                                   <li><a href="javascript:void(0);">pleasant</a></li>
+                                   <li><a href="javascript:void(0);">polished</a></li>
+                                   <li><a href="javascript:void(0);">political</a></li>
+                                   <li><a href="javascript:void(0);">rivate</a></li>
+                                   <li><a href="javascript:void(0);">problem solver</a></li>
+                                   <li><a href="javascript:void(0);">process oriented</a></li>
+                                   <li><a href="javascript:void(0);">proud</a></li>
+                                   <li><a href="javascript:void(0);">quick</a></li>
+                                   <li><a href="javascript:void(0);">quiet</a></li>
+                                   <li><a href="javascript:void(0);">random</a></li>
+                                   <li><a href="javascript:void(0);">reactive</a></li>
+                                   <li><a href="javascript:void(0);">reflective</a></li>
+                                   <li><a href="javascript:void(0);">reliable</a></li>
+                                   <li><a href="javascript:void(0);">restrained</a></li>
+                                   <li><a href="javascript:void(0);">rigid</a></li>
+                                   <li><a href="javascript:void(0);">risk taker</a></li>
+                                   <li><a href="javascript:void(0);">rule bound</a></li>
+                                   <li><a href="javascript:void(0);">sarcastic</a></li>
+                                   <li><a href="javascript:void(0);">satisfied</a></li>
+                                   <li><a href="javascript:void(0);">secure</a></li>
+                                   <li><a href="javascript:void(0);">self driven</a></li>
+                                   <li><a href="javascript:void(0);">self obsessed</a></li>
+                                   <li><a href="javascript:void(0);">self reliant</a></li>
+                                   <li><a href="javascript:void(0);">shabby</a></li>
+                                   <li><a href="javascript:void(0);">showy</a></li>
+                                   <li><a href="javascript:void(0);">shrewd</a></li>
+                                   <li><a href="javascript:void(0);">shy</a></li>
+                                   <li><a href="javascript:void(0);">simple</a></li>
+                                   <li><a href="javascript:void(0);">single minded</a></li>
+                                   <li><a href="javascript:void(0);">sloppy</a></li>
+                                   <li><a href="javascript:void(0);">slow</a></li>
+                                   <li><a href="javascript:void(0);">slow paced</a></li>
+                                   <li><a href="javascript:void(0);">smart</a></li>
+                                   <li><a href="javascript:void(0);">social</a></li>
+                                   <li><a href="javascript:void(0);">spiritual</a></li>
+                                   <li><a href="javascript:void(0);">stable</a></li>
+                                   <li><a href="javascript:void(0);">stern</a></li>
+                                   <li><a href="javascript:void(0);">superficial</a></li>
+                                   <li><a href="javascript:void(0);">supportive</a></li>
+                                   <li><a href="javascript:void(0);">team leader </a></li>
+                                   <li><a href="javascript:void(0);">thinker</a></li>
+                                   <li><a href="javascript:void(0);">thoughtless</a></li>
+                                   <li><a href="javascript:void(0);">timid</a></li>
+                                   <li><a href="javascript:void(0);">transparent</a></li>
+                                   <li><a href="javascript:void(0);">unceremonious</a></li>
+                                   <li><a href="javascript:void(0);">unpretentious</a></li>
+                                   <li><a href="javascript:void(0);">unreliable</a></li>
+                                   <li><a href="javascript:void(0);">unstable</a></li>
+                                   <li><a href="javascript:void(0);">untidy</a></li>
+                                   <li><a href="javascript:void(0);">vague</a></li>
+                                   <li><a href="javascript:void(0);">visionary</a></li>
+                                   <li><a href="javascript:void(0);">vulnerable</a></li>
+                                   <li><a href="javascript:void(0);">wacky</a></li>
+                                   <li><a href="javascript:void(0);">whimsical</a></li>
+                                   <li><a href="javascript:void(0);">willing</a></li>
+                                   <li><a href="javascript:void(0);">wisdomous</a></li>
+                              </ul>
+
+                         </div>
+
+          		</div>
+
+               </div>
+
+               <div class="tagbox">
+                    <input type="text" id="TagValue" name="tagvalue" Placeholder="Choose Your Word..." class="svalue" />
+               </div>
+
+          </div>
+
+    </section>
+
+<script src="js/jquery.tagcanvas.js"></script>
+<script src="js/wordSelection/custom.js"></script>
+<script>
+     $('#cmsg li a').click(function() {
+          var txt = $(this).text();
+          console.log(txt);
+          $('#TagValue').val(txt);
+     });
+</script>
+</body>
+</html>

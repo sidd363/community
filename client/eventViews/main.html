@@ -1,0 +1,143 @@
+<div class="row">
+
+
+    <div class="col-xs-12 col-sm-8">
+        <div class="row">
+            <div class="col-xs-4 pdrg7">
+                <div class="widgetcount yellow">
+                    <small>Total Videos</small>{{totalVideos}}
+                </div>
+                <div class="white-content pd10 clearfix hidden-xs">
+                    <h2>Most Videos <i class="icon-film-play"></i></h2>
+                    <div class="clearfix"></div>
+                    <div  class="shotsbox transition clearfix" ng-repeat="person in mostVideos track by $index">
+                        <div class="countbox clearfix">
+                            <div class="rowcount">{{$index+1}}</div>
+                            <img ng-src="{{person.image_url}}" alt="" />
+                            <h3>{{person.firstName}} {{person.lastName}}</h3>
+                            <span class="cmttime">{{person.noOfVideos}} Videos</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="rowclip">
+                            <a target="_blank" ng-href="{{thumbVideoUrl}}" ng-repeat="thumbVideoUrl in person.videoUrls track by $index"><img ng-src="{{person['coverImages'][$index]}}"  /></a>
+                        </div>
+                        <div class="clearfix" ng-if="$index!=4"></div>
+                        <div class="lgt-seprator" ng-if="$index!=4"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xs-4 pdlt7 pdrg7">
+                <div class="widgetcount green">
+                    <small>Total Likes</small> {{totalLikes}}
+                </div>
+                <div class="white-content pd10 clearfix hidden-xs">
+                    <h2>Most Likes <i class="icon-heart-alt"></i></h2>
+                    <div class="clearfix"></div>
+                    <div class="shotsbox transition clearfix" ng-repeat="person in mostLiked track by $index">
+                        <div class="countbox clearfix">
+                            <div class="rowcount">{{$index+1}}</div>
+                            <img ng-src="{{person.image_url}}" alt="" />
+                            <h3>{{person.firstName}} {{person.lastName}}</h3>
+                            <span class="cmttime">{{person.noOfLikes}} Likes</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="rowclip">
+                            <a target="_blank" ng-href="{{thumbVideoUrl}}" ng-repeat="thumbVideoUrl in person.videoUrls track by $index"><img ng-src="{{person['coverImages'][$index]}}"  /></a>
+                        </div>
+                        <div class="clearfix" ng-if="$index!=4"></div>
+                        <div class="lgt-seprator" ng-if="$index!=4"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4 pdlt7">
+                <div class="widgetcount blue">
+                    <small>Total Comments</small>{{totalComments}}
+                </div>
+                <div class="white-content pd10 clearfix hidden-xs">
+                    <h2>Most Comments <i class="icon-fiveword-semibold"></i></h2>
+                    <div class="clearfix"></div>
+                    <div class="shotsbox transition clearfix" ng-repeat="person in mostCommented track by $index">
+                        <div class="countbox clearfix">
+                            <div class="rowcount">{{$index+1}}</div>
+                            <img ng-src="{{person.image_url}}" alt="" />
+                            <h3>{{person.firstName}} {{person.lastName}}</h3>
+                            <span class="cmttime">{{person.noOfComments}} Comments</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="rowclip">
+                            <a target="_blank" ng-href="{{thumbVideoUrl}}" ng-repeat="thumbVideoUrl in person.videoUrls track by $index"><img ng-src="{{person['coverImages'][$index]}}"  /></a>
+                        </div>
+                        <div class="clearfix" ng-if="$index!=4"></div>
+                        <div class="lgt-seprator" ng-if="$index!=4"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xs-12 col-sm-4" style="padding-left:0px;">
+
+        <div class="tile-wrap">
+            <div class="top-tile-wrap"></div>
+
+            <div class="tile-video">
+                <div class="videowrap">
+                    <video loop autoplay ng-poster="{{coverImage}}" class="tilescreen" muted>
+                        <source  type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h3>{{title}}</h3>
+            </div>
+
+            <div id="tilebottom2" class="tilebottom">
+                <div class="tile-bottom-box">
+                    <span class="icon-video-bold"></span>
+                    <span class="icon-fiveword-semibold"></span>
+                    <span class="plusround"><i></i></span>
+                    <span class="icon-basic-share"></span>
+                    <span class="icon-heart-alt"></span>
+                </div>
+
+                <div class="titlecomment clearfix">
+                    <div class="pro-own-cmt">
+                        <div class="pro-cmt-dls">
+                            <img ng-src="{{image_url}}" class="usrcmtimg" alt="" />
+                            <h5><a href="">{{firstName}}</a></h5>
+                            <a href="#" class="golbx like">{{likeCount}} Like</a>
+                        </div>
+                    </div>
+                    <div class="intro-cmt-panel">
+                        <div class="intro-cmt">
+                            <img ng-src="{{comment.image_url}}" alt="" />
+                            <div class="vdcmt"><span><a href="#">{{comment.firstName}} :&nbsp;</a></span> {{comment.comment.message}}
+                            </div>
+                        </div>
+                        <div class="vdlke"><a href="#">{{commentCount}} comments</a></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-tile-wrap"></div>
+        </div>
+
+    </div>
+
+</div>
+<div class="row mrtp15 bottomfixed">
+    <div class="col-xs-12 col-md-12">
+        <div class="bottomband">
+            <div class="shlogo"><img src="images/shlogo.png" /></div>
+            <div class="shbrkn">Top Trends</div>
+            <div class="shtext"><img src="images/shtext.png" /></div>
+            <div class="marquee" id="ticker-roll">
+                <ul>
+                    <li ng-repeat="notificationObj in notifications">{{notificationObj.message.message}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

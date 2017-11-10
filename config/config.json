@@ -1,0 +1,39 @@
+{
+  "common": {
+    "mltService": {
+      "host": "http://34.212.121.122:8080",
+      "path": "/video/upload",
+      "detail":"/video/getdata"
+    },
+    "mongo": {
+      "connector": "mongodb",
+      "url": "mongodb://localhost/shrofiledump"
+    },
+    "calibrator":{
+      "host":"http://internal-calib-elb-811283636.eu-west-2.elb.amazonaws.com",
+      "vibechartpath":"/calibrator/personalitychart",
+      "wordcloudpath":"/cloud/wordcloud",
+      "maxRelevance":5,
+      "relevanceFactor":0.3
+    },
+    "streamingBase":"http://d203lvyahe3q46.cloudfront.net/",
+    "s3BucketBase":"https://s3.ap-south-1.amazonaws.com/shrofile-videos/",
+    "notificationService": {
+      "host": "http://54.202.16.49:9000",
+      "path": "/api/v1"
+    },
+    "elasticsearch":{
+      "host":"http://localhost:9200",
+      "indexname":"shrofile"
+    },
+    "monitoringEnabled":true,
+    "themes":["shrofile","scifi","travel","sports","news"],
+    "shrofilehost":"http://35.176.247.39:3000",
+    "apiserver":"http://35.176.247.39:3000/api",
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "db": 0
+    }
+  }
+}

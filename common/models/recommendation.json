@@ -1,0 +1,60 @@
+{
+  "name": "recommendation",
+  "plural": "recommendations",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "recommendedTo": {
+      "type": "string",
+      "required": true
+    },
+    "recommendedBy": {
+      "type": "string",
+      "required": true
+    }, 
+    "recommendedObj":{
+      "updatedAt": {
+        "type": "date"
+      },
+      "typeOfRecommendation": {
+        "type": "string"
+      },
+      "videoUrl": {
+        "type": "string"
+      },
+      "recommendationText": {
+        "type": "string"
+      },
+      "description":{
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string"
+    },
+    "invitationObj":{
+      "invitedAt": {
+        "type": "date"
+      },
+      "invitationMessage": {
+        "type": "string"  
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "recommendedTo",
+      "required": true
+    }
+  },
+  "acls": [
+  ],
+  "methods": {
+  }
+}

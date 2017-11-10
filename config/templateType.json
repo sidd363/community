@@ -1,0 +1,241 @@
+{
+  "Video": {
+    "type": "object",
+    "availableSettings":{
+      "filters":["grayscale","sepia","invert","blue screen"],
+      "settings":["Brightness","Hue","Saturation","Contrast"]
+    },
+    "properties": {
+      "segments": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 1,
+        "uniqueItems": true,
+        "description": "s3 keys url of video segment"
+      },
+      "videodescription":{
+        "type":"string"
+      },
+      "videotitle":{
+        "type":"string"
+      },
+      "coverImage":{
+        "type":"string",
+        "description":"cover image of video"
+      },
+      "words":{
+        "type":"array",
+        "description":"5 words about himself"
+      },
+      "url":{
+        "type":"string",
+        "description":"to be sent empty from client"
+      }
+    },
+    "required": [
+      "segments"
+    ]
+  },
+  "Uploads": {
+    "type": "object",
+    "properties": {
+      "url": {
+        "type": "string",
+        "description": "s3 url of document"
+      },
+      "message": {
+        "type": "string",
+        "description": "Few words about document.."
+      }
+    },
+    "required": [
+      "url"
+    ]
+  },
+  "videoComment": {
+    "type": "object",
+    "properties": {
+      "url": {
+        "type": "string",
+        "description": "s3 url of video"
+      },
+      "message": {
+        "type": "string",
+        "description": "Short video as a comment"
+      }
+    },
+    "required": [
+      "url"
+    ]
+  },
+  "Text": {
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "description": "brief text."
+      },
+      "bcolor":{
+        "type": "string",
+        "description": "background color"
+      }
+    },
+    "required": [
+      "message"
+    ]
+  },
+  "Cloud": {
+    "type": "object",
+    "properties": {
+      "words": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 1,
+        "maxItems": 5,
+        "uniqueItems": true,
+        "description": "5 words"
+      }
+    },
+    "required": [
+      "words"
+    ]
+  },
+  "Form": {
+    "Educational Experience": {
+      "type": "object",
+      "items": {
+        "type": "object",
+        "properties": {
+          "institutionsName": {
+            "type": "string",
+            "description": "Name of the School / college"
+          },
+          "degree": {
+            "type": "string",
+            "description": "Your course / degree"
+          },
+          "start": {
+            "type": "Date",
+            "description": "Date of joining"
+          },
+          "end": {
+            "type": "Date",
+            "description": "Date of leaving"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Brief desc of what you have done."
+          },
+          "isCurrentInstitutions": {
+            "type": "Boolean",
+            "description": "Are you Studying now.?"
+          }
+        },
+        "required": [
+          "institutionsName",
+          "degree",
+          "start"
+        ]
+      }
+    },
+    "Work Experience": {
+      "type": "object",
+      "items": {
+        "type": "object",
+        "properties": {
+          "companyName": {
+            "type": "string",
+            "description": "Name of the Company"
+          },
+          "role": {
+            "type": "string",
+            "description": "Your position"
+          },
+          "start": {
+            "type": "Date",
+            "description": "Date of joining"
+          },
+          "end": {
+            "type": "Date",
+            "description": "Date of leaving"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Brief desc of what you have done."
+          },
+          "isCurrentCompany": {
+            "type": "Boolean",
+            "description": "Are you working in this company now.?"
+          }
+        },
+        "required": ["companyName", "role", "start"]
+      }
+    },
+    "Login Form": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "object",
+            "properties": {
+              "coordinates": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "display": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "start": {
+          "type": "Date",
+          "description": "Date of joining"
+        },
+        "end": {
+          "type": "Date",
+          "description": "Date of leaving"
+        },
+        "activity": {
+          "type": "string",
+          "description": "Brief desc of what you have done."
+        }
+      },
+      "required": ["location", "activity", "start"]
+    },
+    "Talent": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "talent": {
+            "type": "string",
+            "description": "Date of joining"
+          },
+          "description": {
+            "type": "string",
+            "description": "Brief desc of what you have done."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "communityActivity",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "answerId": {
+      "type": "string",
+      "required": true
+    },
+    "communityId": {
+      "type": "string",
+      "required": true
+    },
+    "uniqueActivityId": {
+      "type": "string",
+      "id": true
+    },
+    "submittedAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

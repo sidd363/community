@@ -1,0 +1,90 @@
+{
+  "videoUploaded":{
+    "tagid":1,
+    "message":"Your Shrofile is on air!"
+  },
+  "comment":{
+    "tagid":2,
+    "message":"{} commented on your Shrofile on {}",
+    "messageGeneral":"{} commented on {}'s Shrofile on {}",
+    "messageTagged":"{} {} mentioned you in a comment"
+  },
+  "commentUpdate":{
+    "tagid":16,
+    "message":"{} commented on your Status on {}",
+    "messageGeneral":"{} commented on {}'s Shrofile on {}",
+    "messageTagged":"{} {} mentioned you in a comment"
+  },
+  "like":{
+    "tagid":3,
+    "message":"Your post has been liked by {}",
+    "messageGeneral":"{}, {} also commented on {}, {} answer to {}"
+  },
+  "likeUpdate":{
+    "tagid":15,
+    "message":"Your post has been liked by {}",
+    "messageGeneral":"{}, {} also commented on {}, {} answer to {}"
+  },
+  "follow":{
+    "tagid":4,
+    "message":"{} has just started following you!"
+  },
+  "privatemessage":{
+    "tagid":5,
+    "message":"{} messaged you!"
+  },
+  "addedToCommunity":{
+    "tagid":6,
+    "message":"{} added you to {} community"
+  },
+  "communityApprovalRequest":{
+    "tagid":7,
+    "message":"{} has sent you a request to join {} community"
+  },
+  "communityRequestApproved":{
+    "tagid":8,
+    "message":"Your request to join {} community has been approved by {}"
+  },
+  "newPostInCommmunity":{
+    "tagid":9,
+    "message":"{} {} posted a new video in {} community"
+  },
+  "followerPost":{
+    "tagid":10,
+    "message":"{} posted a new video"
+  },
+  "postNewAnswer":{
+    "tagid":11,
+    "message":"Hey {} would you like to record a video about {}"
+  },
+  "makePublic":{
+    "tagid":12,
+    "message":"Hey {} would you like to mmake your video public and share your thoughts with everyone."
+  },
+  "sendIntroNotifications":{
+    "tagid":11,
+    "message":"Hey {}, introduce yourself to other professionals on Shrofile. Get Started!"
+  },
+  "sendDailyUpdateNotifications":{
+    "tagid":11,
+    "message":"Bored of typing? Leave a quick 30 second video update!"
+  },
+  "blogPost":{
+    "tagid":10,
+    "message":"Deepesh just shared a video of Steve Jobs. Tap to view!"
+  },
+  "updateInfoMsg":{
+    "1":"We have 8 companies hiring for 62 positions, http://www.shrofile.com/posts/your-shrofile-can-help-you-get-these-jobs/. They are finding it difficult to locate you without your work information and educational qualification. Kindly update it ASAP and get noticed.",
+    "2":"I'm sure you are busy. All successful people are. But believe me, updating your profile text information (Experience, education etc) will help you get noticed. Kindly update it ASAP.",
+    "3":"Let us know if you are facing any issue in updating your profile text information (Experience, education etc), we would love to help. If not kindly update it ASAP and get noticed.",
+    "4":"Oh boy, it looks like you are really busy. We have checked, it takes only 3 minutes to update your profile text information (Experience, education etc).Do it ASAP and get noticed."
+  },
+  "recommended":{
+    "tagid":13,
+    "message":"{} recommended you!"
+  },
+  "inviteRecommendedMsg":{
+    "tagid":14,
+    "message":"{} has asked a recommendation from you!"
+  }
+}

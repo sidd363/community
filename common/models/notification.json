@@ -1,0 +1,102 @@
+{
+  "name": "notification",
+  "plural": "notifications",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "topicArn": {
+      "type": "string",
+      "required": true
+    },
+    "message": {
+      "type": "object",
+      "required": true
+    },
+    "userId": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getAllNotifications"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getEventNotifications"
+    }
+  ],
+  "methods": {
+    "registerDevice": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "token",
+          "type": "string",
+          "required": true
+        },
+        {
+          "arg": "deviceType",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "register device / update device token for notification.",
+      "http": {
+        "path": "/register",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "getAllNotifications": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "get all notifications of a user",
+      "http": {
+        "path": "/user",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getEventNotifications": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "add video for meta",
+      "http": {
+        "path": "/dashboard",
+        "verb": "get",
+        "status": 200
+      }
+    }
+  }
+}

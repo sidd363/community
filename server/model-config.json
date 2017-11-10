@@ -1,0 +1,162 @@
+{
+  "_meta": {
+    "sources": [
+      "../common/models",
+      "./models",
+      "./node_modules/loopback-component-passport/lib/models"
+    ]
+  },
+  "user": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Role": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "activity": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "question": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "answer": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "LocationInfo": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "LocationDisplay": {
+    "dataSource": "transient",
+    "public": false
+  },
+  "follower": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "friend": {
+    "dataSource": "transient",
+    "public": true
+  },
+  "conversation": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "message": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "comment": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "like": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "myEmailDataSource"
+  },
+  "personality": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "notification": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "subscription": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "device": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "blockuser": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "community": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "member": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "communityActivity": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "userActivity": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "accessCode": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "company": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "businessUser": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "job": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "application": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "recommendation": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "update": {
+    "dataSource": "mongodb",
+    "public": true
+  }
+}

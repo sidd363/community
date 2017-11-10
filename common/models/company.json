@@ -1,0 +1,86 @@
+{
+  "name": "company",
+  "plural": "companies",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "companyName": {
+      "type": "string",
+      "required": true
+    },
+    "companyUrl": {
+      "type": "string",
+      "required": true
+    },
+    "companyDomain": {
+      "type": "string",
+      "required": true,
+      "unique":true
+    },
+    "recruiters": {
+      "type": "number",
+      "default": 0
+    },
+    "freeusers": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "getAdminDashBoard"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getAdminDashBoard"
+    }
+  ],
+  "methods": {
+    "getAdminDashBoard": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/adminDashboard"
+      }
+    }
+  }
+}
+

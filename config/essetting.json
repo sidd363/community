@@ -1,0 +1,41 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "analysis": {
+        "filter": {
+          "desc_ngram": {
+            "type": "ngram",
+            "min_gram": 3,
+            "max_gram": 8
+          }
+        },
+        "analyzer": {
+          "index_analyzer": {
+            "tokenizer": "standard",
+            "char_filter": [
+              "html_strip"
+            ],
+            "filter": [
+              "standard",
+              "lowercase",
+              "asciifolding",
+              "desc_ngram"
+            ]
+          },
+          "search_analyzer":{
+            "tokenizer": "standard",
+            "char_filter": [
+              "html_strip"
+            ],
+            "filter": [
+              "standard",
+              "lowercase",
+              "asciifolding"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

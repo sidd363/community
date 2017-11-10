@@ -1,0 +1,57 @@
+{
+  "name": "like",
+  "plural": "likes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "isLiked": {
+      "type": "any",
+      "required": true
+    },
+    "submittedAt": {
+      "type": "date"
+    },
+    "location": {
+      "type": "Object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
+      "required": true
+    },
+    "question": {
+      "type": "belongsTo",
+      "model": "question",
+      "foreignKey": "questionId",
+      "required": true
+    },
+    "answer": {
+      "type": "belongsTo",
+      "model": "answer",
+      "foreignKey": "answerId",
+      "default": null
+    },
+    "update": {
+      "type": "belongsTo",
+      "model": "update",
+      "foreignKey": "updateId",
+      "default": null
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

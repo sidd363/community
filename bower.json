@@ -1,0 +1,42 @@
+{
+  "name": "ugc frontend",
+  "description": "Moderation panel for goibibo ugc",
+  "version": "0.0.1",
+  "homepage": "http://gurlgitlab02.idc.mihindia.com/goibibo/goibibo_ugc",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.3.0",
+    "angular-cookies": "^1.3.0",
+    "angular-resource": "^1.3.0",
+    "angular-route": "^1.3.0",
+    "angular-sanitize": "^1.3.0",
+    "angular-touch": "^1.3.0",
+    "angular-loader": "1.2.x",
+    "angular-animate": "1.3.x",
+    "jquery": "^2.1.0",
+    "bootstrap": "^3.2.0",
+    "bootstrap-star-rating": "~3.0.0",
+    "ng-flow": "~2",
+    "fusty-flow.js": "~1",
+    "underscore": "~1.7.0",
+    "moment": "~2.8.4",
+    "bootstrap-datepicker": "^1.3.1",
+    "html5-boilerplate": "^v5.0.0",
+    "tracekit": "~0.3.1",
+    "ajaxchimp": "~1.3.0",
+    "FitVids": "~1.1.0",
+    "jquery.localScroll": "~1.4.0",
+    "nivo-lightbox": "~1.2.0",
+    "OwlCarousel": "~1.3.2",
+    "retina.js-js": "~1.0.2",
+    "smooth-scroll": "~1.0.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.3.0"
+  },
+  "appPath": "client",
+  "resolutions": {
+    "angular": "1.3.13"
+  }
+}

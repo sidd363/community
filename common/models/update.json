@@ -1,0 +1,122 @@
+{
+  "name": "update",
+  "plural": "updates",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "status": {
+      "type": "any",
+      "required": true
+    }, 
+    "submittedAt": {
+      "type": "date"
+    },
+    "likeCount": {
+      "type": "number",
+      "default": 0
+    },
+    "commentCount": {
+      "type": "number",
+      "default": 0
+    },
+    "public": {
+      "type": "boolean",
+      "default": true
+    },
+    "topicARN": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    },
+    "status_type": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
+      "required": true
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "like"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getLikes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "postComment"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "listComment"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    }
+  ],
+  "methods": {
+    "changePrivacy": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          },
+          "required": true
+        },
+        {
+          "arg": "isPublic",
+          "type": "boolean",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Change privacy of answer",
+      "http": {
+        "path": "/:id/privacy",
+        "verb": "post",
+        "status": 200
+      }
+    }
+  }
+}

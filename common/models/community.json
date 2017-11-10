@@ -1,0 +1,268 @@
+{
+  "name": "community",
+  "plural": "communities",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "coverImageUrl": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "date"
+    },
+    "memberCount": {
+      "type": "number",
+      "default": 0
+    },
+    "approvedMemberCount": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "members": {
+      "type": "hasMany",
+      "model": "member",
+      "foreignKey": "communityId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "addMembers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "joinCommunity"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "leaveCommunity"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getTrendingCommunities"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "searchCommunities"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getCommunityDetails"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getMembers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    }
+  ],
+  "methods": {
+    "joinCommunity": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "id",
+        "type": "string",
+        "description": "fr",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Join community",
+      "http": {
+        "path": "/:id/join",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "leaveCommunity": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "id",
+        "type": "string",
+        "description": "fr",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Join community",
+      "http": {
+        "path": "/:id/leave",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "addMembers": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "fr",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "groupMembers",
+          "type": "array",
+          "description": "fr"
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Add members to coummnity",
+      "http": {
+        "path": "/:id/addmembers",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "getTrendingCommunities": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "get trending communities",
+      "http": {
+        "path": "/trending",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "searchCommunities": {
+      "accepts": [
+        {
+          "arg": "query",
+          "type": "object",
+          "description": "search query",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Community search",
+      "http": {
+        "verb": "GET",
+        "path": "/search"
+      }
+    },
+    "getCommunityDetails": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "community id",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Community details",
+      "http": {
+        "verb": "GET",
+        "path": "/:id"
+      }
+    },
+    "getMembers": {
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "community id",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "get Community members",
+      "http": {
+        "verb": "GET",
+        "path": "/:id/getmembers",
+        "status": 200
+      }
+    }
+  }
+}

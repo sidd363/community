@@ -1,0 +1,250 @@
+{
+  "name": "question",
+  "plural": "questions",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "answerCount": {
+      "type": "number",
+      "default": 0
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "section": {
+      "type": "string",
+      "required": true
+    },
+    "submittedAt": {
+      "type": "date"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "colorcode": {
+      "type": "string",
+      "required": true
+    },
+    "hint": {
+      "type": [
+        "string"
+      ]
+    },
+    "image": {
+      "type": "string"
+    },
+    "answerTemplate": {
+      "type": "Object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
+      "required": true
+    },
+    "answers": {
+      "type": "hasMany",
+      "model": "answer",
+      "foreignKey": "questionId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "__create__answers"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "randomquestion"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getAllQuestions"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getQuestion"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getSpecificQuestion"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "updateQuestions"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "sendAnswerNotification"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendIntroNotifications"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendDailyUpdateNotifications"
+    }
+  ],
+  "methods": {
+    "getQuestion": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "qorder",
+        "type": "number",
+        "description": "name of question",
+        "required": true
+      },
+      "returns": {
+        "arg": "data",
+        "type": "question",
+        "root": true
+      },
+      "description": "Returns question of a particular name",
+      "http": {
+        "path": "/getquestion",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getSpecificQuestion": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "id",
+        "type": "string",
+        "description": "question id",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "question",
+        "root": true
+      },
+      "description": "Returns specific question with answers",
+      "http": {
+        "path": "/getquestion/:id",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "updateQuestions": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns specific question with answers",
+      "http": {
+        "path": "/updatequestions",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "sendAnswerNotification": {
+      "isStatic": true,
+      "accepts": [
+        {
+        "arg": "id",
+        "type": "string",
+        "description": "question id"
+        },
+        {
+          "arg": "qorder",
+          "type": "string",
+          "description": "question order"
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "question",
+        "root": true
+      },
+      "description": "Returns specific question with answers",
+      "http": {
+        "path": "/sendAnswerNotification",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "sendIntroNotifications": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns specific question with answers",
+      "http": {
+        "path": "/sendIntroNotifications",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "sendDailyUpdateNotifications": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns specific question with answers",
+      "http": {
+        "path": "/sendDailyUpdateNotifications",
+        "verb": "get",
+        "status": 200
+      }
+    }
+  }
+}

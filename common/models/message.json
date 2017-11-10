@@ -1,0 +1,162 @@
+{
+  "name": "message",
+  "plural": "messages",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true
+    },
+    "submittedAt": {
+      "type": "date",
+      "required": true
+    },
+    "message": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "fromUserId": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "fromId"
+    },
+    "toUserId": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "toId"
+    },
+    "conversation": {
+      "type": "belongsTo",
+      "model": "conversation",
+      "foreignKey": "conversationId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "authenticated"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendProfileUpdateMessage"
+    }
+  ],
+  "methods": {
+    "listAllMessages": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "message",
+        "root": true
+      },
+      "description": "list all private messages of logged in user.",
+      "http": {
+        "path": "/",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getConversation": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "userId",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "message",
+        "root": true
+      },
+      "description": "get all private messages to given user of logged in user.",
+      "http": {
+        "path": "/:userId",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "postConversation": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "userId",
+          "type": "string",
+          "required": true
+        },
+        {
+          "arg": "message",
+          "type": "string",
+          "required": true
+        },
+        {
+          "arg": "type",
+          "type": "string"
+        },
+        {
+          "arg": "url",
+          "type": "string"
+        },
+        {
+          "arg": "coverImage",
+          "type": "string"
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "message",
+        "root": true
+      },
+      "description": "post a private messages to given user of logged in user.",
+      "http": {
+        "path": "/:userId",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "sendProfileUpdateMessage": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/sendProfileUpdateMessage"
+      }
+    }
+  }
+}

@@ -1,0 +1,458 @@
+/* --------------------------------------
+=========================================
+RESPONSIVE FIXES
+=========================================
+-----------------------------------------*/
+ 
+
+@media (max-width: 1024px) {
+ 
+    
+    body {
+        font-size: 15px;
+        line-height: 26px;
+    }
+
+    header {
+        background-attachment: scroll;
+    }
+
+    header .color-overlay {
+        min-height: 800px;
+    }
+
+    .app-brief .left-align {
+        text-align: center;
+    }
+
+    .colored-line-left {
+        float: none;
+        margin: auto;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+ 
+    
+    html {
+        font-size: 90%;
+    }
+
+    header .color-overlay {
+        min-height: 780px;
+    }
+	
+	/*
+    .sticky-navigation .navbar-header {
+        width: 100%;
+        position: relative;
+        text-align: center;
+        margin-top: 10px;
+    }
+	
+    .sticky-navigation .navbar-header a {
+        float: none !important;
+    }
+    
+    .sticky-navigation .navbar-header img {
+        max-height: 40px;
+    }
+    
+    .sticky-navigation .main-navigation {
+        text-align: center;
+        width: 100%;
+        padding-top: 0;
+    }
+	*/
+    header .intro-section {
+        padding-top: 0;
+    }
+    
+    header .phone-image {
+        max-width: 450px;
+        margin-top: 5%;
+    }
+
+    .features-left,
+    .features-right {
+        margin-top: 0;
+    }
+
+    .features-left .icon-container,
+    .features-right .icon-container {
+        display: none;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.nav>li>a {
+		position: relative;
+		display: block;
+		padding: 15px 10px;
+	}
+    .hper100 {
+        height: auto;
+        position: relative;
+    }
+    .howitworksnav {
+        left: 0px;
+    }
+    
+    #downloadbtn {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        top: 20%;
+        transform: translateY(20%);
+    }
+
+    #phonecenter {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        top: 20%;
+        transform: translateY(20%);
+    }
+
+    #loginbtn {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        top: 60%;
+        transform: translateY(60%);
+    }
+}
+
+@media (max-width: 767px) {
+ 
+    
+    html {
+        font-size: 80%;
+    }
+
+    body {
+        font-size: 15px;
+        line-height: 26px;
+    }
+
+    header .color-overlay {
+        min-height: 580px;
+    }
+
+    header .only-logo .navbar {
+        padding: 20px;
+    }
+    
+    .navbar-inverse .navbar-nav {
+        padding-left: 10px;
+        line-height: normal;
+        text-align: center;
+    }
+
+    .navbar-inverse .navbar-nav>li {
+        display: inline-block;
+        margin-bottom: 0;
+    }
+
+    header .intro-section {
+        padding-top: 9%;
+        text-align: center;
+    }
+	
+	.sticky-navigation {
+    	min-height: 44px;
+	}
+	
+	.navbar-toggle {
+    	margin-top: 5px;
+    	margin-bottom: 5px;
+	}
+	
+	.navbar-brand {
+    	padding: 10px 15px;
+		height:auto;
+	}
+	.sticky-navigation .navbar-header img {
+    	max-height: 24px;
+    	-webkit-backface-visibility: hidden;
+	}
+
+    .hper100 {
+        height: auto;
+        position: relative;
+    }
+
+    .howitworksnav {
+        left: 0px;
+    }
+    
+    #downloadbtn {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        top: 10%;
+        transform: translateY(0%);
+    }
+
+    #phonecenter {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        top: 10%;
+        transform: translateY(0%);
+    }
+
+    #loginbtn {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        top: 0%;
+        transform: translateY(0%);
+    }
+
+    .features .features-left,
+    .features .features-right {
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    .features .feature {
+		margin-top: 0px;
+        margin-bottom: 70px;
+    }
+
+    .features-left .icon-container,
+    .features-right .icon-container {
+        float: none;
+        margin-left: inherit;
+        min-height: 60px;
+        margin-top: 20px;
+        min-height: 55px !important;
+    }
+
+    .feature .icon-container .icon {
+        margin: auto;
+    }
+
+    .feature.top120 {
+        padding-top: 0px;
+    }
+    
+	.feature.text-right, .feature.text-left, .fetaure-details.text-right, .fetaure-details.text-left {
+		text-align: center !important;
+	}
+	
+    .download .subscription-form .input-box {
+        margin: auto;
+        width: 80%;
+        margin-bottom: 10px;
+    }
+	
+	.app-brief .left-align {
+		padding-bottom: 70px;
+	}
+
+    .app-brief .left-align.mpad {
+        padding-bottom: 20px !important;
+    }
+	
+	.app-brief.pd110 {
+		padding-top: 0px;
+	}
+	
+	.feature.top80 {
+		padding-top: 0px;
+	}
+	
+	.feature.subfeature {
+		padding-top: 0px;
+    	padding-right: 0px;
+	}
+	
+	.app-brief .phone-image {
+		max-width: 350px;
+    	margin: auto;
+    	margin-bottom: 50px;
+	}
+	
+	.social-share {
+		padding-right: 0px;
+		text-align: center;
+	}
+	.social-share ul {
+		margin: 0 auto;
+		float: none;
+	}
+}
+
+@media (max-width: 480px) {
+
+    .sgncontainer {
+        position: relative;
+        max-width: 320px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .card {
+        padding: 40px 0 40px 0;
+    }
+
+    .card .title {
+        margin-bottom: 10px;
+    }
+
+    .card .input-container {
+        position: relative;
+        margin: 0 30px 40px;
+    }
+
+    .card .title {
+      padding: 10px 0 10px 30px;
+    }
+
+    .card.alt {
+        right: -98px;
+    }
+
+    .card.alt .togglesignin {
+        width: 80px;
+        height: 80px; 
+        font-size: 36px;
+        line-height: 80px;  
+
+    }
+
+    .sgncontainer.active .card.alt .togglesignin {
+        position: absolute;
+        top: 40px;
+        right: -70px;
+        box-shadow: none;
+        -webkit-transform: scale(15);
+        transform: scale(15);
+        -webkit-transition: -webkit-transform .3s ease;
+        transition: -webkit-transform .3s ease;
+        transition: transform .3s ease;
+        transition: transform .3s ease, -webkit-transform .3s ease;
+    }
+
+}
+@media (max-width: 480px) {
+ 
+    
+    html {
+        font-size: 65%;
+    }
+
+    header .color-overlay {
+        min-height: 480px;
+    }
+
+    header .only-logo .navbar {
+        padding: 10px;
+    }
+
+    header .intro-section {
+        padding-top: 10%;
+    }
+
+    header .intro-section .shrofile-tag > span {
+        left: 0px;
+        line-height: 80px;
+    }
+
+    header .intro-section .shrofile-tag > small {
+        left: 0px;
+    }
+
+    header .intro-section .shrofile-tag > p {
+        left: 0px;
+        line-height: 80px;
+    }
+
+    header .intro-section .intro {
+        margin-bottom: 16px;
+    }
+
+    header .intro-section h5 {
+        color: #ffffff;
+    }
+
+    header .intro-section .buttons {
+        margin-top: 15px;
+    }
+
+    .testimonials, 
+    .download { 
+        background-attachment: inherit !important; 
+    }
+    
+    .download .subscription-form .input-box {
+        width: 95%;
+        height: 50px;
+    }
+
+    .standard-button,
+    .standard-button2 {
+        font-size: 15px;
+        min-width: 100px;
+        padding: 11px 20px 11px 20px;
+    }
+
+    .feature:hover .icon-container .icon, 
+    footer .contact-button:hover {
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+    }
+
+}
+
+@media (max-width: 320px) {
+ 
+    
+    html {
+        font-size: 60.5%;
+    }
+}
+
+
+@media (min-width: 320px) and (max-width: 640px) and  (orientation: landscape) {
+        
+    .full-screen h1 {
+        font-size: 30px !important;
+        line-height: 40px;
+        margin-top: 0;
+        font-weight: bold;
+    }
+    .full-screen .intro-section .intro {
+       margin-bottom: 0;
+            
+    }
+    
+    .full-screen .intro-section h5 {
+        
+        font-size: 14px;
+    }
+    .full-screen .intro-section .buttons { 
+        margin-top: 0;
+    }
+    
+    .full-screen .standard-button {
+        font-size: 14px;
+        padding: 8px 5px;
+    }
+}

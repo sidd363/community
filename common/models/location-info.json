@@ -1,0 +1,32 @@
+{
+  "name": "LocationInfo",
+  "base": "Model",
+  "idInjection": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "coordinates": {
+      "type": [
+        "number"
+      ],
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "locationDisplay": {
+      "type": "embedsOne",
+      "model": "LocationDisplay",
+      "property": "display",
+      "options": {
+        "validate": false,
+        "forceId": false,
+        "autoId": false
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

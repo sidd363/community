@@ -1,0 +1,223 @@
+{
+  "name": "businessUser",
+  "plural":"businessUsers",
+  "base": "User",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "companyId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "login"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "recruiter",
+      "permission": "ALLOW",
+      "property": "searchUser"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "searchUser"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "changePassword"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "recruiter",
+      "permission": "ALLOW",
+      "property": "getSavedSearches"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "getSavedSearches"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "recruiter",
+      "permission": "ALLOW",
+      "property": "inviteCandidates"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "inviteCandidates"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "dashboardCount"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "recruiter",
+      "permission": "ALLOW",
+      "property": "dashboardCount"
+    }
+  ],
+  "methods": {
+    "searchUser": {
+      "accepts": [{
+        "arg": "queryObj",
+        "type": "object",
+        "description": "search query",
+        "required": true
+      }],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "POST",
+        "path": "/search"
+      }
+    },
+    "getSavedSearches": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/search"
+      }
+    },
+    "changePassword": {
+      "accepts": [{
+          "arg": "oldpassword",
+          "type": "string",
+          "description": "old password",
+          "required": true
+        },
+        {
+          "arg": "newpassword",
+          "type": "string",
+          "description": "new password",
+          "required": true
+        },
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "id of the user whose password change is required",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "changepassword",
+        "type": "boolean"
+      },
+      "description": "user changePassword",
+      "http": {
+        "verb": "put",
+        "path": "/changepassword/:id"
+      }
+    },
+    "inviteCandidates": {
+      "accepts": [{
+          "arg": "jobId",
+          "type": "string",
+          "description": "jobid",
+          "required": true
+        },
+        {
+          "arg": "userList",
+          "type": "array",
+          "description": "new password",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user inviteCandidates",
+      "http": {
+        "verb": "post",
+        "path": "/invite/candidates"
+      }
+    },
+    "dashboardCount": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user inviteCandidates",
+      "http": {
+        "verb": "get",
+        "path": "/dashboard/count"
+      }
+    }
+  }
+}

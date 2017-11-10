@@ -1,0 +1,318 @@
+{
+  "name": "answer",
+  "plural": "answers",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "answer": {
+      "type": "any",
+      "required": true
+    }, 
+    "first_segment_video_name": {
+      "type": "string",
+      "unique": true
+    },
+    "submittedAt": {
+      "type": "date"
+    },
+    "likeCount": {
+      "type": "number",
+      "default": 0
+    },
+    "commentCount": {
+      "type": "number",
+      "default": 0
+    },
+    "public": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "likes_meta": {
+      "type": [
+        "string"
+      ]
+    },
+    "location": {
+      "type": "Object"
+    },
+    "topicARN": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
+      "required": true
+    },
+    "question": {
+      "type": "belongsTo",
+      "model": "question",
+      "foreignKey": "questionId",
+      "required": true
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "like"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getLikes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "postComment"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "listComment"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "changePrivacy"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "changePrivacyV2"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "checkPrivacy"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "createPersonality"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "addVideoMeta"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getEventDashBoard"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "flag"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteById"
+    }
+  ],
+  "methods": {
+    "changePrivacy": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          },
+          "required": true
+        },
+        {
+          "arg": "isPublic",
+          "type": "boolean",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Change privacy of answer",
+      "http": {
+        "path": "/:id/privacy",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "changePrivacyV2": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          },
+          "required": true
+        },
+        {
+          "arg": "publicObject",
+          "type": "object",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Change privacy of answer",
+      "http": {
+        "path": "/:id/v2/privacy",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "checkPrivacy": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          },
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Change privacy of answer",
+      "http": {
+        "path": "/:id/privacy",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "flag": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          },
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Flag this answer",
+      "http": {
+        "path": "/:id/flag",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "createPersonality": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "create cloud and vibe",
+      "http": {
+        "path": "/createpersonality",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "addVideoMeta": {
+      "accepts": [
+        {
+          "arg": "offset",
+          "type": "number",
+          "description": "offset from where to start the feed",
+          "required": false
+        },
+        {
+          "arg": "limit",
+          "type": "number",
+          "description": "limit the number of feeds",
+          "required": false
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "add video for meta",
+      "http": {
+        "path": "/meta",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getEventDashBoard": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "add video for meta",
+      "http": {
+        "path": "/dashboard",
+        "verb": "get",
+        "status": 200
+      }
+    }
+  }
+}

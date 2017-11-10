@@ -1,0 +1,740 @@
+{
+  "name": "user",
+  "plural": "users",
+  "base": "User",
+  "options": {
+    "validateUpsert": true,
+    "emailVerificationRequired":true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "deviceId": {
+      "type": "string"
+    },
+    "profileViews": {
+      "type": "Number",
+      "required": false,
+      "default": 0
+    },
+    "likeCount": {
+      "type": "number",
+      "default": 0
+    },
+    "deviceARN": {
+      "type": "object"
+    },
+    "userTopicARN": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "videos": {
+      "type": "hasMany",
+      "model": "video",
+      "foreignKey": "userId"
+    },
+    "questions": {
+      "type": "hasMany",
+      "model": "question",
+      "foreignKey": "userId"
+    },
+    "recommendations": {
+      "type": "hasMany",
+      "model": "recommendation",
+      "foreignKey": "recommendedTo"
+    }
+  },
+  "acls": [{
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "moderator",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "myProfile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getProfileView"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "updateProfileView"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "resetNewPassword"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getPublicProfile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getWebProfile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "addDeviceToken"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getRecommendedUsers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "searchUser"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "changePassword"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "updateImageurl"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "indexUsers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendWelcomeEmail"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendHoliEmail"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getCommunities"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "sendNotificationToAll"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getVerifiedUsers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "getVerifiedUsers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "moderator",
+      "permission": "ALLOW",
+      "property": "uploadResume"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "uploadResume"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "addRole"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "confirmVerificationCodeMock"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "confirmVerificationCode"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "myProfileV2Mock"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "myprofileV2"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "__findById__recommendations"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "__get__recommendations"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getExpressions"
+    }
+  ],
+  "methods": {
+    "getProfileView": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "userId",
+        "type": "string",
+        "description": "id of the user whose profile views is required",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "Number",
+        "root": true
+      },
+      "description": "get number of times user profile viewed.",
+      "http": {
+        "path": "/:userId/profileviews",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getExpressions": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "userId",
+        "type": "string",
+        "description": "id of the user whose Expressions are required",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "get all expressions of a user",
+      "http": {
+        "path": "/:userId/getExpressions",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "updateProfileView": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "userId",
+        "type": "string",
+        "description": "id of the user whose profile is viewed",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "Number",
+        "root": true
+      },
+      "description": "update number of views of an user profile.",
+      "http": {
+        "path": "/:userId/profileviews",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "myProfile": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "get your profile.",
+      "http": {
+        "path": "/myprofile",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "myProfileV2Mock": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "get your profile Mock.",
+      "http": {
+        "path": "/myprofileV2Mock",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "myprofileV2": {
+      "isStatic": true,
+      "accepts": [
+        {"arg": "tabid", "type": "Number", "http": {"source": "query"}},
+        {"arg": "skip", "type": "Number", "http": {"source": "query"}},
+        {"arg": "limit", "type": "Number", "http": {"source": "query"}}
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "get your profile v2.",
+      "http": {
+        "path": "/myprofileV2",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "resetNewPassword": {
+      "isStatic": true,
+      "accepts": [{
+          "arg": "password",
+          "type": "string",
+          "required": true
+        },
+        {
+          "arg": "confirmation",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "reset the password with new one.",
+      "http": {
+        "path": "/resetpassword",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "getPublicProfile": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "id",
+        "type": "string",
+        "description": "id of the user whose profile is required",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns the public profile of a user",
+      "http": {
+        "path": "/profile/:id",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "addDeviceToken": {
+      "isStatic": true,
+      "accepts": [{
+        "arg": "deviceDetail",
+        "type": "object",
+        "description": "user id of the user moderating the review",
+        "http": {
+          "source": "body"
+        }
+      }],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "add devicetoken for user",
+      "http": {
+        "verb": "POST",
+        "path": "/devicetoken"
+      }
+    },
+    "searchUser": {
+      "accepts": [{
+        "arg": "query",
+        "type": "object",
+        "description": "search query",
+        "required": true
+      }],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/search"
+      }
+    },
+    "getRecommendedUsers": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/getRecommendedUsers"
+      }
+    },
+    "changePassword": {
+      "accepts": [{
+          "arg": "oldpassword",
+          "type": "string",
+          "description": "old password",
+          "required": true
+        },
+        {
+          "arg": "newpassword",
+          "type": "string",
+          "description": "new password",
+          "required": true
+        },
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "id of the user whose password change is required",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "changepassword",
+        "type": "boolean"
+      },
+      "description": "user changePassword",
+      "http": {
+        "verb": "put",
+        "path": "/changepassword/:id"
+      }
+    },
+    "updateImageurl": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/updateImageurl"
+      }
+    },
+    "indexUsers": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/indexUsers"
+      }
+    },
+    "sendWelcomeEmail": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "accepts": [{
+        "arg": "offset",
+        "type": "number",
+        "description": "offset from where to start the feed",
+        "required": false
+      }, {
+        "arg": "limit",
+        "type": "number",
+        "description": "limit the number of feeds",
+        "required": false
+      }],
+      "http": {
+        "verb": "GET",
+        "path": "/welcome"
+      }
+    },
+    "sendHoliEmail": {
+      "accepts": [{
+          "arg": "offset",
+          "type": "number",
+          "description": "offset from where to start the feed",
+          "required": false
+        },
+        {
+          "arg": "limit",
+          "type": "number",
+          "description": "limit the number of feeds",
+          "required": false
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/holi"
+      }
+    },
+    "getWebProfile": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "id",
+        "type": "string",
+        "description": "id of the user whose profile is required",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns the public profile of a user",
+      "http": {
+        "path": "/profile/:id/web",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getCommunities": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "id",
+        "type": "string",
+        "description": "id of the user whose profile is required",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns the public profile of a user",
+      "http": {
+        "path": "/:id/communities",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "generateUserActivity": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/generateUserActivity"
+      }
+    },
+    "sendNotificationToAll": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/sendNotificationToAll"
+      }
+    },
+    "getVerifiedUsers": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/getVerifiedUsers"
+      }
+    },
+    "uploadResume": {
+      "isStatic": true,
+      "accepts": [{
+        "arg": "id",
+        "type": "string",
+        "description": "id of the user whose profile is required",
+        "http": {
+          "source": "path"
+        }
+      },{
+        "arg": "file",
+        "type": "object",
+        "description": "file metadata",
+        "required": true
+      }],
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Upload resume API",
+      "http": {
+        "path": "/profile/:id/resume",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "addRole": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user search",
+      "http": {
+        "verb": "GET",
+        "path": "/updaterole"
+      }
+    },
+    "confirmVerificationCode": {
+      "accepts": [{
+          "arg": "uid",
+          "type": "String",
+          "description": "Userid of mongo",
+          "required": true
+        },
+        {
+          "arg": "token",
+          "type": "String",
+          "description": "verification code sent to the user",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "user confirm api ",
+      "http": {
+        "verb": "POST",
+        "path": "/confirmVerificationCode"
+      }
+    }
+  }
+}
+

@@ -1,0 +1,98 @@
+{
+  "name": "follower",
+  "plural": "followers",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userId": {
+      "type": "string",
+      "required": true
+    },
+    "followerId": {
+      "type": "string",
+      "required": true
+    },
+    "uniqueFollowerId": {
+      "type": "string",
+      "id": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "userId": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "followerId": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "followerId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "listFollowers"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "isFollowing"
+    }
+  ],
+  "methods": {
+    "listFollowers": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "List of people who following me.",
+      "http": {
+        "path": "/",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "isFollowing": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "fr",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "List of people who following me.",
+      "http": {
+        "path": "/:id/isfollowing",
+        "verb": "get",
+        "status": 200
+      }
+    }
+  }
+}

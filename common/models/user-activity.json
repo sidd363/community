@@ -1,0 +1,88 @@
+{
+  "name": "userActivity",
+  "plural": "userActivities",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "communityBucket": {
+      "type": "object"
+    },
+    "followerBucket": {
+      "type": "object"
+    },
+    "likeBucket": {
+      "type": "object"
+    },
+    "commentBucket": {
+      "type": "object"
+    },
+    "generalBucket": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId",
+      "required": true
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "createNew"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "backFillData"
+    }
+  ],
+  "methods": {
+    "createNew": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "reset the password with new one.",
+      "http": {
+        "path": "/createnew",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "backFillData": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "reset the password with new one.",
+      "http": {
+        "path": "/backfill",
+        "verb": "get",
+        "status": 200
+      }
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "name": "activity",
+  "plural": "activities",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "actorId": {
+      "type": "string",
+      "required": true
+    },
+    "actorInfo": {
+      "type": "Object"
+    },
+    "verb": {
+      "type": "string"
+    },
+    "resourceType": {
+      "type": "string",
+      "required": true
+    },
+    "resourceId": {
+      "type": "string"
+    },
+    "resourceInfo": {
+      "type": "Object"
+    },
+    "createdAt": {
+      "type": "date"
+    },
+    "deviceType": {
+      "type": "string"
+    },
+    "likeCount": {
+      "type": "number",
+      "default": 0
+    },
+    "replyCount": {
+      "type": "number",
+      "default": 0
+    },
+    "comment": {
+      "type": "Object"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "myFeed"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "myFeedV2"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getEventActivity"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getSingleActivity"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getAllActivities"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "updateShareUrls"
+    }
+  ],
+  "methods": {
+    "getEventActivity": {
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "add video for meta",
+      "http": {
+        "path": "/dashboard",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getSingleActivity": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "id",
+        "type": "string",
+        "description": "id of the activity",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns the video and related activities",
+      "http": {
+        "path": "/:id/web",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getAllActivities": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "offset",
+          "type": "number",
+          "description": "offset from where to start the feed",
+          "required": false
+        },
+        {
+          "arg": "limit",
+          "type": "number",
+          "description": "required number of records",
+          "required": false
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns the video and related activities",
+      "http": {
+        "path": "/web",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "updateShareUrls": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Returns the video and related activities",
+      "http": {
+        "path": "/updateShareUrls",
+        "verb": "get",
+        "status": 200
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "conversation",
+  "plural": "conversations",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "required": true
+    },
+    "submittedAt": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "userOne": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userOne"
+    },
+    "userTwo": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userTwo"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}

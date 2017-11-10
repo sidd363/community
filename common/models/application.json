@@ -1,0 +1,231 @@
+{
+  "name": "application",
+  "plural": "applications",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "jobId": {
+      "type": "string"
+    },
+    "jobTitle": {
+      "type": "string"
+    },
+    "userId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "job": {
+      "type": "belongsTo",
+      "model": "job",
+      "foreignKey": "jobId",
+      "required": true
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userid",
+      "required": true
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getApplication"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "changeStatus"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "recruiter",
+      "permission": "ALLOW",
+      "property": "getShortlistedCandidates"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "getShortlistedCandidates"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "recruiter",
+      "permission": "ALLOW",
+      "property": "sendApplicationEmail"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "businessAdmin",
+      "permission": "ALLOW",
+      "property": "sendApplicationEmail"
+    }
+
+  ],
+  "methods": {
+    "apply": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "id",
+        "type": "string",
+        "description": "id of the job",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Apply for a job;",
+      "http": {
+        "path": "/apply/:id",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "getApplication": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          },
+          "required": true
+        },
+        {
+          "arg": "status",
+          "type": "string",
+          "http": {
+            "source": "path"
+          },
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Get applications of a particular status",
+      "http": {
+        "path": "/:id/:status",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "changeStatus": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          },
+          "required": true
+        },
+        {
+          "arg": "status",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Get applications of a particular status",
+      "http": {
+        "path": "/:id/status",
+        "verb": "post",
+        "status": 200
+      }
+    },
+    "getShortlistedCandidates": {
+      "isStatic": true,
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Get shrtlisted applications",
+      "http": {
+        "path": "/shortlisted",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "sendApplicationEmail": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "userId",
+          "type": "string",
+          "required": true
+        },
+        {
+          "arg": "subject",
+          "type": "string",
+          "required": true
+        },
+        {
+          "arg": "message",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "Object",
+        "root": true
+      },
+      "description": "Send application email",
+      "http": {
+        "path": "/email",
+        "verb": "post",
+        "status": 200
+      }
+    }
+  }
+}
+

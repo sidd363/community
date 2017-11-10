@@ -1,0 +1,176 @@
+db.answer.aggregate(
+            [
+                { $match: {"type":"Video","answer.url":{"$exists":true}} },
+                { $group: { _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } }, count: { $sum: 1 } } },
+                { $sort: { _id: 1 } },
+                { $out : "videodata" }
+            ]
+        )
+
+        db.user.aggregate(
+                    [
+                        { $match: {"emailVerified":true} },
+                        { $group: { _id: { $dateToString: { format: "%Y-%m-%d", date: "$joiningDate" } }, count: { $sum: 1 } } },
+                        { $sort: { _id: 1 } },
+                        { $out : "userdata" }
+                    ]
+                )
+
+                db.user.aggregate(
+                            [
+                                { $match: {"emailVerified":true,"videoCreated":true} },
+                                { $group: { _id: { $dateToString: { format: "%Y-%m-%d", date: "$joiningDate" } }, count: { $sum: 1 } } },
+                                { $sort: { _id: 1 } },
+                                { $out : "createduserdata" }
+                            ]
+                        )
+
+
+        mongoexport -d shrofile -c data -q '{}' --type=csv --fields _id,count --out check.csv
+
+db.user.find({})
+
+db.runCommand ( { distinct: "question", key: "userId", query: {"answerCount":{"$gt":0}} } ).length
+
+
+
+
+
+var videoUsers=db.runCommand ( { distinct: "answer", key: "userId", query: {"type":"Video"} } ).values
+
+
+
+db.question.aggregate(
+            [
+                { $match: {"answerCount":{"$gt":0}} },
+                { $group: { _id:"$userId" }, count: { $sum: 1 } },
+                { $sort: { count: 1 } }
+            ]
+        )
+
+        videoUsers.forEach(function(id){
+          print (id)
+          db.user.update({"_id":id},{"$set":{"videoCreated":true}})
+        })
+
+db.AccessToken.find().forEach(function(doc){   var user = db.user.findOne({"_id":doc.userId});   if(user){   db.AccessToken.update(     {     "_id":doc._id     },     {     "$set":{"firstName":user.firstName,"lastName":user.lastName,"image_url":user.image_url,"email":user.email,"userTopicARN":user.userTopicARN}     },     {}        )   } })
+
+
+
+mapUsers = function() {
+    if(this.emailVerified && this.joiningDate){
+    var day = this.joiningDate.getFullYear()+"/"+this.joiningDate.getMonth()+"/"+this.joiningDate.getDate();
+    var values = {
+        "email":this.email,
+        "videoCreated":this.videoCreated || false,
+        "joiningDate":day,
+        "userId":this._id
+    };
+    if(this.educationList || this.experienceList){
+      values.textInfo = true
+    }else{
+      values.textInfo = false;
+    }
+    emit(this._id, values);
+    }
+};
+
+
+
+mapAnswers = function() {
+    if(this.type=="Video" && this.answer.url && this.answer.url.length>0){
+      var values = {
+          createdAt:this.createdAt,
+          public:this.public,
+          url:this.answer.url
+      };
+      emit(this.userId, values);
+    }
+};
+
+mapQuestionCount = function(){
+  var values = {
+      answerCount:this.total
+  };
+  emit(this._id, values);
+}
+
+reduce = function(k, values) {
+    var result = {"publicAnswerCount":0,privateAnswerCount:0};
+    var videovalues = {
+        createdAt:"",
+        public:"",
+        url:"",
+        userId:""
+    };
+    values.forEach(function(value) {
+    if ("url" in value && value.public) {
+            if (!("publicVideos" in result)) {
+                result.publicVideos = [];
+            }
+            result.publicVideos.push(value);
+            result["publicAnswerCount"]=result.publicVideos.length;
+        } if ("url" in value && !value.public) {
+            if (!("privateVideos" in result)) {
+                result.privateVideos = [];
+            }
+            result.privateVideos.push(value);
+            result["privateAnswerCount"]=result.privateVideos.length;
+        }
+        var field;
+        for (field in value) {
+            if (value.hasOwnProperty(field) && !(field in videovalues) ) {
+                result[field] = value[field];
+            }
+        }
+    });
+    return result;
+};
+
+
+
+db.question.aggregate([
+                     { $match: { type: "Video"} },
+                     { $group: { _id: "$userId", total: { $sum: "$answerCount" } } },
+                     { $sort: { total: -1 } },
+                     { $out : "questionCountData" }
+                   ])
+
+db.user.mapReduce(mapUsers, reduce, {"out": {"reduce": "user_videos"}});
+
+db.answer.mapReduce(mapAnswers,reduce, {"out": {"reduce": "user_videos"}})
+
+
+db.questionCountData.mapReduce(mapQuestionCount,reduce, {"out": {"reduce": "user_videos"}})
+
+db.user_videos.find().forEach(function(doc){
+  var answerCount = db.question.aggregate([
+                       { $match: { type: "Video","userId":doc._id } },
+                       { $group: { _id: doc._id, total: { $sum: "$answerCount" } } },
+                       { $sort: { total: -1 } }
+                     ])
+  var user = db.user.findOne({"_id":doc.value.userId}) || {}
+  var count =0
+  if(answerCount && answerCount._firstBatch && answerCount._firstBatch[0]){
+  count=answerCount._firstBatch[0].total
+  }
+  var day = "";
+  if(user.joiningDate){
+    day = user.joiningDate.getFullYear()+"/"+user.joiningDate.getMonth()+"/"+user.joiningDate.getDate();
+  }
+  db.user_videos.update({
+    "value.userId":doc.value.userId
+      },{
+  "$set":{
+    "answerCount":count,
+    "videoCreatedDate":day
+  }
+  })
+})
+
+
+
+
+
+
+                   

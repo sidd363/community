@@ -1,0 +1,116 @@
+{
+  "name": "personality",
+  "plural": "personality",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userid": {
+      "type": "string",
+      "required": true
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "relationType": {
+      "type": "string",
+      "required": true
+    },
+    "uniqueDocId": {
+      "type": "string",
+      "id": true,
+      "required": true
+    },
+    "personalityChart": {
+      "type": "object"
+    },
+    "wordCloud": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "getMyPersonality"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "getUserPersonality"
+    }
+  ],
+  "methods": {
+    "getMyPersonality": {
+      "isStatic": true,
+      "accepts": {
+        "arg": "userRelation",
+        "type": "string",
+        "description": "relation type",
+        "http": {
+          "source": "path"
+        }
+      },
+      "returns": {
+        "arg": "data",
+        "type": "personality",
+        "root": true
+      },
+      "description": "Returns the personality chart of a user",
+      "http": {
+        "path": "/relation/:userRelation",
+        "verb": "get",
+        "status": 200
+      }
+    },
+    "getUserPersonality": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "userRelation",
+          "type": "string",
+          "description": "relation type",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "id",
+          "type": "string",
+          "description": "userid",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "personality",
+        "root": true
+      },
+      "description": "Returns the personality chart of a user",
+      "http": {
+        "path": "/:id/relation/:userRelation",
+        "verb": "get",
+        "status": 200
+      }
+    }
+  }
+}

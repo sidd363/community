@@ -1,0 +1,28 @@
+{
+  "community": {
+    "properties": {
+      "id": {
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      },
+      "name": {
+        "type": "string",
+        "include_in_all": true,
+        "analyzer": "index_analyzer",
+        "index": "analyzed",
+        "search_analyzer": "search_analyzer"
+      },
+      "coverImageUrl": {
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      },
+      "type": {
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      }
+    }
+  }
+}

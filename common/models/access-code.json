@@ -1,0 +1,104 @@
+{
+  "name": "accessCode",
+  "plural":"accessCodes",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "id": true,
+      "required": true,
+      "index": true
+    },
+    "freeusers": {
+      "type": "string",
+      "required": true,
+      "default": 0
+    },
+    "createdAt": {
+      "type": "number",
+      "required": true
+    },
+    "recruiters": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "company": {
+      "type": "belongsTo",
+      "model": "company",
+      "foreignKey": "companyId",
+      "required": true
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "assignCompany"
+    }
+  ],
+  "methods": {
+    "assignCompany": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "code",
+          "type": "string",
+          "description": "accessCode",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "companyId",
+          "type": "string",
+          "description": "companyId",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": {
+        "arg": "data",
+        "type": "object",
+        "root": true
+      },
+      "description": "Assigns access code to a company",
+      "http": {
+        "path": "/:code/assign/:companyId",
+        "verb": "post",
+        "status": 200
+      }
+    }
+  }
+}

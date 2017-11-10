@@ -1,0 +1,86 @@
+{
+  "user": {
+    "properties": {
+      "userid": {
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      },
+      "displayname": {
+        "type": "string",
+        "include_in_all": true,
+        "analyzer": "index_analyzer",
+        "index": "analyzed",
+        "search_analyzer": "search_analyzer"
+      },
+      "company":{
+        "type": "string",
+        "include_in_all": true,
+        "analyzer": "index_analyzer",
+        "index": "analyzed",
+        "search_analyzer": "search_analyzer"
+      },
+      "college":{
+        "type": "string",
+        "include_in_all": true,
+        "analyzer": "index_analyzer",
+        "index": "analyzed",
+        "search_analyzer": "search_analyzer"
+      },
+      "degree":{
+        "type": "string",
+        "include_in_all": true,
+        "analyzer": "index_analyzer",
+        "index": "analyzed",
+        "search_analyzer": "search_analyzer"
+      },
+      "designation":{
+        "type": "string",
+        "include_in_all": true,
+        "analyzer": "index_analyzer",
+        "index": "analyzed",
+        "search_analyzer": "search_analyzer"
+      },
+      "searchLocation":{
+        "type": "string",
+        "include_in_all": true,
+        "analyzer": "index_analyzer",
+        "index": "analyzed",
+        "search_analyzer": "search_analyzer"
+      },
+      "firstName": {
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      },
+      "lastName": {
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      },
+      "image_url": {
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      },
+      "geoLocation":{
+        "type":"geo_point"
+      },
+      "email": {
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      },
+      "userTopicARN":{
+        "type": "string",
+        "include_in_all": true,
+        "index": "not_analyzed"
+      },
+      "workingSince":{
+        "type":"date",
+        "include_in_all": true,
+        "index": "analyzed"
+      }
+    }
+  }
+}

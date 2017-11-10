@@ -1,0 +1,20 @@
+{
+  "name": "LocationDisplay",
+  "base": "Model",
+  "idInjection": false,
+  "properties": {
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

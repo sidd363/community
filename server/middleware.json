@@ -1,0 +1,42 @@
+{
+  "initial:before": {
+    "loopback#favicon": {
+      "params": "$!../client/images/favicon/favicon-32x32.png"
+    }
+  },
+  "initial": {
+    "compression": {},
+    "cors": {
+      "params": {
+        "origin": true,
+        "credentials": true,
+        "maxAge": 86400
+      }
+    }
+  },
+  "session": {},
+  "auth": {},
+  "parse": {},
+  "routes": {
+    "loopback#rest": {
+      "paths": [
+        "${restApiRoot}"
+      ]
+    }
+  },
+  "files": {
+    "loopback#static": {
+      "params": "$!../client"
+    }
+  }
+  ,"final": { 
+  } ,
+  "final:after": {
+    "./middleware/log-error": {},
+    "strong-error-handler": {
+      "params": {
+         "log": true
+       }
+    }
+  }
+}
